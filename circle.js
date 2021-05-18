@@ -1,8 +1,8 @@
-class Truck{
+class Cir{
     constructor(x,y,width,height){
         var options={
         }
-        this.image = loadImage("images/truck[21].png")
+        this.image = loadImage("images/preview.png")
         this.body = Bodies.rectangle(x,y,width,height,options);
         this.width = width;
         this.height = height;
