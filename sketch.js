@@ -19,7 +19,7 @@ var h41, h42, h43, h44, h45, h46, h47, h48, h49, h50;
 var h1Img, h2Img, h3Img, h4Img, h5Img, h6Img, h7Img, h8Img, h9Img;
 var ho1Img, ho2Img, ho3Img, ho4Img;
 var ho1, ho2, ho3, ho4, ho5, ho6, ho7, ho8, ho9, ho10;
-var a1, a2, a3, a4;
+var rightA, leftA, downA, upA;
 var plus, minus, plusImg, minusImg;
 var f1, f2, f3, f4, f5, f6, f7, f8, f9, f10;
 var f1i, f2i, f3i, f4i, f5i, f6i, f7i, f8i, f9i, f10i;
@@ -647,19 +647,19 @@ function setup() {
   h10.addImage(h5Img);
   h10.scale = 0.08; 
   h10 = createSprite(85,580,20,20);
-  h10.addImage(h5Img);
+  h10.addImage(h10Img);
   h10.scale = 0.08; 
   h10 = createSprite(115,640,20,20);
-  h10.addImage(h5Img);
+  h10.addImage(h9Img);
   h10.scale = 0.08; 
   h10 = createSprite(115,620,20,20);
-  h10.addImage(h5Img);
+  h10.addImage(h6Img);
   h10.scale = 0.08; 
   h10 = createSprite(115,600,20,20);
-  h10.addImage(h5Img);
+  h10.addImage(h2Img);
   h10.scale = 0.08; 
   h10 = createSprite(115,580,20,20);
-  h10.addImage(h5Img);
+  h10.addImage(h12Img);
   h10.scale = 0.08; 
   /*h10 = createSprite(634,335,20,20);
   h10.addImage(h5Img);
@@ -852,9 +852,18 @@ function setup() {
 	World.add(world, truckBody);*/
 
   //arrow
-  a1 = createSprite(1100,325,50,50);
-  a1.addImage(a1Img);
-  a1.scale = 0.5
+  rightA = createSprite(205,612,50,50);
+  rightA.addImage(a1Img);
+  rightA.scale = 0.1
+  leftA = createSprite(130,612,50,50);
+  leftA.addImage(a3Img);
+  leftA.scale = 0.1
+  downA = createSprite(170,640,50,50);
+  downA.addImage(a2Img);
+  downA.scale = 0.1
+  upA = createSprite(170,580,50,50);
+  upA.addImage(a4Img);
+  upA.scale = 0.1
   //+ & -
   plus = createSprite(1000,580,20,20);
   plus.addImage(plusImg);
@@ -875,7 +884,7 @@ function draw() {
   strokeWeight(4)
   ellipse(ball.position.x,ball.position.y,20);
 
-  if(truck.isTouching(b1)){
+  if(isTouching(truck,b1)){
     truck.velocityX=0;
     truck.velocityY=0;
   }
@@ -884,28 +893,51 @@ function draw() {
   edges= createEdgeSprites();
   truck.collide(edges);
    
-   //movement
-   if(keyIsDown(UP_ARROW)){
-    truck.addImage(tImg1)
-    truck.position.y = truck.position.y-5
+  if(mousePressedOver(plus)){
+    truck.velocityX = 2;
   }
-  if(keyIsDown(DOWN_ARROW)){
+   //movement
+   if(mousePressedOver(upA) || keyWentDown(UP_ARROW)){
+    if(mousePressedOver(plus)){
+      truck.velocityX = 0
+      truck.velocityY = +2;
+    }
+    if(mousePressedOver(minus)){
+      truck.velocityX = 0
+      truck.velocityY = -2;
+    }
+    truck.addImage(tImg1)
+    truck.velocityX = 0
+    truck.velocityY = -5
+  }
+  if(mousePressedOver(downA) || keyWentDown(DOWN_ARROW)){
+    if(mousePressedOver(plus)){
+      truck.velocityX = 0
+      truck.velocityY = truck.velocityY++;
+    }
+    if(mousePressedOver(minus)){
+      truck.velocityX = 0
+      truck.velocityY = truck.velocityY-2;
+    }
     truck.addImage(tImg3)
     //camera.position.x = truck.x
     //camera.position.y = truck.y
-    truck.y = truck.y+5
+    truck.velocityX = 0
+    truck.velocityY = +5
   }
-  if(keyIsDown(RIGHT_ARROW)){
+  if(mousePressedOver(rightA) || keyWentDown(RIGHT_ARROW)){
     truck.addImage(tImg2)
     //camera.position.x = truck.x
     //camera.position.y = truck.y
-    truck.x = truck.x+5
+    truck.velocityX = +5
+    truck.velocityY = 0
   }
-  if(keyIsDown(LEFT_ARROW)){
+  if(mousePressedOver(leftA) || keyWentDown(LEFT_ARROW)){
     truck.addImage(tImg4)
     //camera.position.x = truck.x
     //camera.position.y = truck.y
-    truck.x = truck.x-5
+    truck.velocityX = -5
+    truck.velocityY = 0
   }
  
   //vertical:::
@@ -1056,7 +1088,7 @@ function draw() {
 
   drawSprites();
   }
-  /*function isTouching(object1,object2){
+  function isTouching(object1,object2){
     if (object1.x - object2.x < object2.width/2 + object1.width/2
       && object2.x - object1.x < object2.width/2 + object1.width/2
       && object1.y - object2.y < object2.height/2 + object1.height/2
@@ -1067,4 +1099,4 @@ function draw() {
     else {
       return false;
     } 
-  }*/
+  }
