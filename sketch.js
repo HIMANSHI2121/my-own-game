@@ -142,13 +142,13 @@ function setup() {
   b6 = createSprite(337,512,275,127);
   b6.shapeColor = "#E0C193";
   b7 = createSprite(107,387,190,50);
-  b7.shapeColor = "red";
+  b7.shapeColor = "#E0C193";
   b8 = createSprite(336,345,275,135);
   b8.shapeColor = "#E0C193";
   b9 = createSprite(68,255,130,150);
   b9.shapeColor = "#E0C193";
   b9i = createSprite(70,55,130,180);
-  b9i.shapeColor = "red";
+  b9i.shapeColor = "#E0C193";
   b10 = createSprite(1128,490,155,85);
   b10.shapeColor = "#E0C193";
   b11 = createSprite(1096,389,220,54);
